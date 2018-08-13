@@ -46,6 +46,10 @@ Plugin 'nanotech/jellybeans.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 
+" run tests in terminal
+Plugin 'janko-m/vim-test'
+Plugin 'benmills/vimux'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -146,6 +150,26 @@ nnoremap    <leader>m           :Marks<cr>
 nnoremap    <leader>h           :History<cr>
 
 let g:ackprg = 'rg --vimgrep'
+
+" Vimux
+let g:VimuxOrientation = "v"
+let g:VimuxHeight = "40"
+let test#strategy = "vimux"
+
+nnoremap    <leader>tt          :TestNearest<CR>
+nnoremap    <leader>tf          :TestFile<CR>
+nnoremap    <leader>ta          :TestSuite<CR>
+nnoremap    <leader>tl          :TestLast<CR>
+nnoremap    <leader>tg          :TestVisit<CR>
+
+nnoremap    <Leader>vq          :VimuxCloseRunner<CR>
+nnoremap    <Leader>vz          :call VimuxZoomRunner()<CR>
+nnoremap    <Leader>vi          :VimuxInspectRunner<CR>
+map         <Leader>vl          :VimuxRunLastCommand<CR>
+map         <Leader>vp          :VimuxPromptCommand<CR>
+nnoremap    <leader>vr          :call VimuxRunLastCommand()<CR>
+nnoremap    <leader>vc          :call VimuxCloseRunner()<CR>
+nnoremap    <leader>w           :Files<cr><c-r><c-w>
 
 " Linting
 let g:ale_sign_warning = '▲'
