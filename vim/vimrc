@@ -48,7 +48,9 @@ Plugin 'tpope/vim-fugitive'
 
 " run tests in terminal
 Plugin 'janko-m/vim-test'
-Plugin 'benmills/vimux'
+Plugin 'tpope/vim-dispatch'
+Plugin 'skywind3000/asyncrun.vim'
+" Plugin 'benmills/vimux'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -105,6 +107,11 @@ set wildignore+=*/.git,*/tmp/*,*.so,*.swp,*.zip
 nnoremap    <leader>ev          :tabedit $MYVIMRC<cr>
 nnoremap    ==                mz=ap`z
 
+" moving lines and blocks
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+
+
 " highlight parenthesis
 highlight MatchParen cterm=none ctermbg=none ctermfg=blue
 
@@ -159,9 +166,9 @@ nnoremap    <leader>h           :History<cr>
 let g:ackprg = 'rg --vimgrep'
 
 " Vimux
-let g:VimuxOrientation = "v"
-let g:VimuxHeight = "40"
-let test#strategy = "vimux"
+" let g:VimuxOrientation = "v"
+" let g:VimuxHeight = "40"
+let test#strategy = "asyncrun"
 
 nnoremap    <leader>tt          :TestNearest<CR>
 nnoremap    <leader>tf          :TestFile<CR>

@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+#	name = David Floegel
+#	email = davidf@learningladders.info
+[user]
+	email = davidf@learningladders.info
+[core]
+	excludesfile = /Users/davidfloegel/.gitignore_global
