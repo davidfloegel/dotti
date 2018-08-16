@@ -38,6 +38,7 @@ Plugin 'tpope/vim-abolish'
 
 " Enhanced language packs
 Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-commentary'
 
 " colour scheme
 Plugin 'nanotech/jellybeans.vim'
