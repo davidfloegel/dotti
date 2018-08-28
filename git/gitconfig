@@ -2,8 +2,8 @@
 [user]
 # Please adapt and uncomment the following lines:
 #	name = David Floegel
-#	email = davidf@learningladders.info
+#	email = mail@davidfloegel.com
 [user]
-	email = davidf@learningladders.info
+	email = mail@davidfloegel.com
 [core]
 	excludesfile = /Users/davidfloegel/.gitignore_global
