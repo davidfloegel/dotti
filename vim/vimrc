@@ -62,6 +62,8 @@ filetype plugin indent on    " required
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
+set noswapfile
+
 " Switch syntax highlighting on
 syntax on
 
