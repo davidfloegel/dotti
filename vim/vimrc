@@ -20,6 +20,8 @@ Plugin 'Valloric/YouCompleteMe'
 " vinegar file explorer
 Plugin 'tpope/vim-vinegar'
 
+Plugin 'tpope/vim-eunuch'
+
 " obvious resize panes
 Plugin 'talek/obvious-resize'
 
@@ -29,6 +31,7 @@ Plugin 'junegunn/fzf.vim'
 
 " linting
 Plugin 'w0rp/ale'
+Plugin 'ianks/vim-tsx'
 
 " Ignoring node_modules and vendor etc in search
 Plugin 'mileszs/ack.vim', { 'on': 'Ack' }
@@ -167,6 +170,7 @@ nnoremap    <leader>m           :Marks<cr>
 nnoremap    <leader>h           :History<cr>
 
 let g:ackprg = 'rg --vimgrep'
+let g:ackhighlight = 1
 
 " Vimux
 " let g:VimuxOrientation = "v"
@@ -196,13 +200,14 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fix_on_save = 1
+let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
 let g:ale_linters = {
-\  'php': ['php', 'php_cs_fixer', 'phpmd', 'phpstan'],
-\  'javascript': ['eslint']  
+\  'javascript': ['eslint'],
+\  'typescript': ['tslint', 'tsserver']
 \}
 let g:ale_fixers = {
-\ 'php': ['php_cs_fixer'],
-\ 'javascript': ['eslint']
+\ 'javascript': ['eslint'],
+\ 'typescript': ['tslint', 'prettier', 'tslint']
 \}
 let g:ale_php_phpcs_standard = 'phpcs.xml'
 let g:ale_php_phpmd_ruleset = 'phpmd.xml'
