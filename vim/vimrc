@@ -54,7 +54,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'janko-m/vim-test'
 Plugin 'tpope/vim-dispatch'
 Plugin 'skywind3000/asyncrun.vim'
-" Plugin 'benmills/vimux'
+
+" snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -135,16 +138,19 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 " on save automatically remove trailing whitespaces from these file types
-autocmd BufWritePre *.js,*.jsx,*.php,*.py :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py,*.feature, :call <SID>StripTrailingWhitespaces()
 
 " YouCompleteMe
-  let g:ycm_min_num_of_chars_for_completion = 4
-  let g:ycm_min_num_identifier_candidate_chars = 4
+  let g:ycm_min_num_of_chars_for_completion = 3
+  let g:ycm_min_num_identifier_candidate_chars = 3
   let g:ycm_enable_diagnostic_highlighting = 0
   set completeopt-=preview
   let g:ycm_add_preview_to_completeopt = 0
   let g:ycm_enable_diagnostic_signs = 0
-
+  " make YCM compatible with UltiSnips (using supertab)
+  let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+  let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+  let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " Split Screens
 "/ Obvious Resize
@@ -192,6 +198,13 @@ nnoremap    <leader>vr          :call VimuxRunLastCommand()<CR>
 nnoremap    <leader>vc          :call VimuxCloseRunner()<CR>
 nnoremap    <leader>w           :Files<cr><c-r><c-w>
 
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" snippets
+let g:UltiSnipsExpandTrigger="<S-tab>"
+let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/snippets"]
+
 " Linting
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
@@ -206,11 +219,9 @@ let g:ale_linters = {
 \  'typescript': ['tslint', 'tsserver']
 \}
 let g:ale_fixers = {
-\ 'javascript': ['eslint'],
-\ 'typescript': ['tslint', 'prettier', 'tslint']
+\ 'javascript': ['prettier'],
+\ 'typescript': ['tslint', 'prettier']
 \}
-let g:ale_php_phpcs_standard = 'phpcs.xml'
-let g:ale_php_phpmd_ruleset = 'phpmd.xml'
 nmap <F8> <Plug>(ale_fix)
 
 function! LightlineLinterWarnings() abort
