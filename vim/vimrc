@@ -57,7 +57,6 @@ Plugin 'skywind3000/asyncrun.vim'
 
 " snippets
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -72,6 +71,7 @@ set noswapfile
 
 " Switch syntax highlighting on
 syntax on
+set redrawtime=10000
 
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
@@ -147,10 +147,13 @@ autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py,*.feature, :call <SID>StripTraili
   set completeopt-=preview
   let g:ycm_add_preview_to_completeopt = 0
   let g:ycm_enable_diagnostic_signs = 0
-  " make YCM compatible with UltiSnips (using supertab)
-  let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-  let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-  let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" UtilSnips
+  let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/ultisnips"]
+  let g:UltiSnipsExpandTrigger = "<C-l>"
+  let g:UltiSnipsJumpForwardTrigger = "<C-l>"
+  let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+  let g:UltiSnipsEditSplit = "vertical"
 
 " Split Screens
 "/ Obvious Resize
@@ -197,13 +200,6 @@ map         <Leader>vp          :VimuxPromptCommand<CR>
 nnoremap    <leader>vr          :call VimuxRunLastCommand()<CR>
 nnoremap    <leader>vc          :call VimuxCloseRunner()<CR>
 nnoremap    <leader>w           :Files<cr><c-r><c-w>
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" snippets
-let g:UltiSnipsExpandTrigger="<S-tab>"
-let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/snippets"]
 
 " Linting
 let g:ale_sign_warning = '▲'
