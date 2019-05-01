@@ -44,6 +44,13 @@ test('${1:Some things needs certainty}', () => {
 })
 endsnippet
 
+snippet wrapdesc
+describe('$1', () => {
+  ${VISUAL}
+})
+endsnippet
+
+
 #-------------------------------------------------------------------
 # Other Helpers
 #-------------------------------------------------------------------
@@ -54,3 +61,4 @@ endsnippet
 snippet import "Import stuff" b
 import $1 from '$2${0:$1}'
 endsnippet
+

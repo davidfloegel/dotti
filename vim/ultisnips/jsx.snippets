@@ -1,0 +1,84 @@
+extends html
+extends javascript
+
+#-------------------------------------------------------------------
+# Lifecycle Methods
+#-------------------------------------------------------------------
+snippet cdm
+componentDidMount = () => {
+	${0}
+}
+endsnippet
+
+snippet cdu
+componentDidUpdate = (prevProps, prevState, snapshot) => {
+	${0}
+}
+endsnippet
+
+snippet cwu
+componentWillUnmount = () => {
+	${0}
+}
+endsnippet
+
+snippet constructor
+constructor(props) {
+	super(props)
+
+	${0}
+}
+endsnippet
+
+#-------------------------------------------------------------------
+# State
+#-------------------------------------------------------------------
+snippet ssf
+this.setState(prevState => ({$0}))
+endsnippet
+
+snippet ss
+this.setState({$0})
+endsnippet
+
+#-------------------------------------------------------------------
+# Components
+#-------------------------------------------------------------------
+snippet reactfunc "Functional component" b
+import React from 'react'
+
+const `!v my#js#jsx_filename_to_name()` = (${1}) => (
+	<React.Fragment>
+		${2}
+	</React.Fragment>
+)
+
+export default `!v my#js#jsx_filename_to_name()`
+endsnippet
+
+snippet reactclass "Stateful component" b
+import React, {Component} from 'react'
+
+class `!v my#js#jsx_filename_to_name()` extends Component {
+	// static propTypes = {}
+
+	state = {}
+
+	render() {
+		return (
+			<div>
+				${1:go on}
+			</div>
+		)
+	}
+}
+
+export default `!v my#js#jsx_filename_to_name()`
+endsnippet
+
+#-------------------------------------------------------------------
+# Other Helpers
+#-------------------------------------------------------------------
+snippet cn
+className="$0"
+endsnippet
