@@ -1,3 +1,23 @@
-snippet tsignore "ignore next line"
+extends javascript
+
+#-------------------------------------------------------------------
+# Types
+#-------------------------------------------------------------------
+snippet type
+type ${1} = {
+  key: number;
+}
+endsnippet
+
+snippet interface
+interface ${1} {
+  key: number;
+}
+endsnippet
+
+#-------------------------------------------------------------------
+# Other Helpers
+#-------------------------------------------------------------------
+snippet td
 // tslint:disable-next-line
 endsnippet

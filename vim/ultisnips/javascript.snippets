@@ -1,7 +1,56 @@
+#-------------------------------------------------------------------
+# Logging
+#-------------------------------------------------------------------
 snippet log "console.log stuff"
 console.log(${1})
 endsnippet
 
 snippet l "console.log stuff even quicker"
 console.log('>>>', $0)
+endsnippet
+
+#-------------------------------------------------------------------
+# Control Statements
+#-------------------------------------------------------------------
+snippet if "generate if statement"
+if (${1}) {
+  ${2}
+}
+endsnippet
+
+snippet switch "generate switch statement"
+switch (${1}) {
+  case ${2}:
+    ${3}
+  default:
+    throw Error('No matching case in switch expression')
+}
+endsnippet
+
+#-------------------------------------------------------------------
+# Testing
+#-------------------------------------------------------------------
+snippet "describe" "generate describe block" rbA
+describe('$1', () => {
+  test('$2', () => {
+    $0
+  })
+})
+endsnippet
+
+snippet test "generate test" b
+test('${1:Some things needs certainty}', () => {
+  ${2}
+})
+endsnippet
+
+#-------------------------------------------------------------------
+# Other Helpers
+#-------------------------------------------------------------------
+snippet > "generate arrow function" i
+(${1}) => ${2:{$3}}
+endsnippet
+
+snippet import "Import stuff" b
+import $1 from '$2${0:$1}'
 endsnippet
