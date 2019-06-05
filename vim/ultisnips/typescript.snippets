@@ -22,3 +22,41 @@ endsnippet
 snippet td
 // tslint:disable-next-line
 endsnippet
+
+#-------------------------------------------------------------------
+# Components
+#-------------------------------------------------------------------
+snippet tsxfunc "[TS] Functional component" b
+import React from 'react'
+
+interface Props {}
+
+const `!v my#js#jsx_filename_to_name()`: React.SFC<Props> = (${1}) => (
+	<React.Fragment>
+		${2}
+	</React.Fragment>
+)
+
+export default `!v my#js#jsx_filename_to_name()`
+endsnippet
+
+snippet tsxclass "Stateful component" b
+import React, {Component} from 'react'
+
+interface Props {}
+interface State {}
+
+class `!v my#js#jsx_filename_to_name()` extends Component<Props, State> {
+	readonly state: State = {}
+
+	render() {
+		return (
+			<div>
+				${1:go on}
+			</div>
+		)
+	}
+}
+
+export default `!v my#js#jsx_filename_to_name()`
+endsnippet
