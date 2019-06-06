@@ -59,6 +59,11 @@ Plugin 'skywind3000/asyncrun.vim'
 " snippets
 Plugin 'SirVer/ultisnips'
 
+" Markdown
+Plugin 'plasticboy/vim-markdown'
+Plugin 'junegunn/vim-easy-align'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -257,6 +262,12 @@ function! s:MaybeUpdateLightline()
     call lightline#update()
   end
 endfunction
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " Section: Visual
 " ===============
