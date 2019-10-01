@@ -44,6 +44,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'tpope/vim-commentary'
 Plugin 'styled-components/vim-styled-components'
+Plugin 'jparise/vim-graphql'
 
 " colour scheme
 Plugin 'nanotech/jellybeans.vim'
@@ -61,7 +62,7 @@ Plugin 'skywind3000/asyncrun.vim'
 Plugin 'SirVer/ultisnips'
 
 " Markdown
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'
 Plugin 'junegunn/vim-easy-align'
 
 
@@ -154,6 +155,8 @@ autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py,*.feature, :call <SID>StripTraili
   set completeopt-=preview
   let g:ycm_add_preview_to_completeopt = 0
   let g:ycm_enable_diagnostic_signs = 0
+  " let g:ycm_key_list_stop_completion = "<C-y>"
+  " let g:ycm_key_list_select_completion = "<C-y>"
 
 " UtilSnips
   let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/ultisnips"]
@@ -219,7 +222,8 @@ let g:ale_fix_on_save = 1
 let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
 let g:ale_linters = {
 \  'javascript': ['eslint'],
-\  'typescript': ['tslint', 'tsserver']
+\  'typescript': ['tslint', 'tsserver'],
+\  'graphql': ['gqlint']
 \}
 let g:ale_fixers = {
 \ 'javascript': ['prettier'],

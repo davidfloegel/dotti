@@ -44,6 +44,12 @@ test('${1:Some things needs certainty}', () => {
 })
 endsnippet
 
+snippet it "generate it" b
+it('${1:does something}', () => {
+  ${2}
+})
+endsnippet
+
 snippet wrapdesc
 describe('$1', () => {
   ${VISUAL}
@@ -60,5 +66,9 @@ endsnippet
 
 snippet import "Import stuff" b
 import $1 from '$2${0:$1}'
+endsnippet
+
+snippet edl "eslint disable"
+// eslint-disable-next-line
 endsnippet
 
