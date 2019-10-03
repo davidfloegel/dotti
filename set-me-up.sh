@@ -6,24 +6,16 @@ CONFIG=$(pwd)
 # install things
 #-------------------------------------------------------------------------------
 
-# Permissions
-# Set this, otherwise reinstalling homeebrew fails
-sudo chown -R $(whoami) /usr/local/Cellar
-
 # Homebrew
-echo "reinstalling Homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/reinstall/master/reinstall)"
+echo "install Homebrew..."
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew upgrade
 
 
 # ZSH
-echo "reinstalling ZSH..."
-brew reinstall gdbm && brew unlink gdbm && brew link gdbm
-brew rereinstall ncurses
+echo "install ZSH..."
 brew reinstall zsh
-sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/reinstall.sh)"
-brew upgrade zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 if [ ! -f ~/.zshrc ]; then
   ln -s ${CONFIG}/zsh/zshrc ~/.zshrc
@@ -33,9 +25,7 @@ else
 fi
 
 # Git
-echo "reinstalling Git..."
-brew reinstall git
-
+echo "install Git..."
 if [ ! -f ~/.gitconfig ]; then
   ln -s ${CONFIG}/git/gitconfig ~/.gitconfig
   echo "✅ Linked gitconfig to ~/.gitconfig"
@@ -54,7 +44,7 @@ ssh-keygen -t rsa -b 4096 -C "david.floegel@sofarsounds.com"
 
 # NVM
 brew reinstall nvm
-nvm reinstall 10
+nvm install 10
 nvm alias default 10
 
 
