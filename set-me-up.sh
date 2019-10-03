@@ -40,8 +40,6 @@ else
   echo "✅ .gitignore_global file already linked, ignore"
 fi
 
-ssh-keygen -t rsa -b 4096 -C "david.floegel@sofarsounds.com"
-
 # NVM
 brew reinstall nvm
 nvm install 10
