@@ -8,14 +8,14 @@ CONFIG=$(pwd)
 
 # Homebrew
 echo "install Homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew upgrade
+# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# brew upgrade
 
 
 # ZSH
 echo "install ZSH..."
-brew reinstall zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# brew reinstall zsh
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 if [ ! -f ~/.zshrc ]; then
   ln -s ${CONFIG}/zsh/zshrc ~/.zshrc
@@ -40,11 +40,19 @@ else
   echo "✅ .gitignore_global file already linked, ignore"
 fi
 
-# NVM
-brew reinstall nvm
-nvm install 10
-nvm alias default 10
+# Git configuration
+git config core.ignorecase false
 
+# NVM
+ brew reinstall nvm
+ nvm install 10
+ nvm alias default 10
+
+# HUB
+brew install hub
+
+# Install packages
+yarn global add prettier tslint
 
 #-------------------------------------------------------------------------------
 # Configure VIM
@@ -74,3 +82,8 @@ echo "reinstalling Vim Plugins"
 brew reinstall macvim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +Pluginreinstall +qall
+
+# set up YouCompleteMe
+cd ~/.vim/bundle/YouCompleteMe
+./install.py --ts-completer
+

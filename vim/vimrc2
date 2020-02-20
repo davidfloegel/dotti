@@ -1,0 +1,309 @@
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+filetype off
+
+set t_Co=256
+set clipboard=unnamed
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" auto completion
+Plugin 'Valloric/YouCompleteMe'
+
+" vinegar file explorer
+Plugin 'tpope/vim-vinegar'
+
+Plugin 'tpope/vim-eunuch'
+
+" obvious resize panes
+Plugin 'talek/obvious-resize'
+
+" fuzzy search
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
+" linting
+Plugin 'w0rp/ale'
+Plugin 'ianks/vim-tsx'
+
+" Ignoring node_modules and vendor etc in search
+Plugin 'mileszs/ack.vim', { 'on': 'Ack' }
+
+" Enhanced search + replace
+Plugin 'tpope/vim-abolish'
+
+" Enhanced language packs
+Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-commentary'
+Plugin 'styled-components/vim-styled-components'
+Plugin 'jparise/vim-graphql'
+
+" colour scheme
+Plugin 'nanotech/jellybeans.vim'
+
+" git stuff
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+
+" run tests in terminal
+Plugin 'janko-m/vim-test'
+Plugin 'tpope/vim-dispatch'
+Plugin 'skywind3000/asyncrun.vim'
+
+" snippets
+Plugin 'SirVer/ultisnips'
+
+" Markdown
+" Plugin 'plasticboy/vim-markdown'
+Plugin 'junegunn/vim-easy-align'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+" Make backspace behave in a sane manner.
+set backspace=indent,eol,start
+
+set noswapfile
+
+" Switch syntax highlighting on
+syntax on
+set redrawtime=10000
+
+let mapleader = "\<Space>"
+let maplocalleader = "\\"
+
+" Enable file type detection and do language-dependent indenting.
+filetype plugin indent on
+
+" display line numbers
+" auto toggle between relative and absolute line numbers (relative on insert
+" mode)
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+" indentation
+set history=500
+set expandtab " always use spaces instead of tab characters
+set tabstop=2 
+set shiftwidth=2
+set softtabstop=2
+set autoindent 
+set colorcolumn=100
+
+" white spaces, tab stops and line breaks
+set list
+set listchars=tab:→\ 
+set listchars+=trail:·
+set listchars+=space:·
+highlight NonText ctermfg=lightgrey
+highlight SpecialKey ctermfg=lightgrey
+
+" spelling
+set ignorecase smartcase
+set spelllang=en_gb
+syntax spell toplevel
+
+set wildignore+=*/.git,*/tmp/*,*.so,*.swp,*.zip
+
+nnoremap    <leader>ev          :tabedit $MYVIMRC<cr>
+nnoremap    ==                mz=ap`z
+
+" moving lines and blocks
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+
+
+" highlight parenthesis
+highlight MatchParen cterm=none ctermbg=none ctermfg=blue
+
+" clean up trailing whitespaces
+function! <SID>StripTrailingWhitespaces()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+" on save automatically remove trailing whitespaces from these file types
+autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py,*.feature, :call <SID>StripTrailingWhitespaces()
+
+" YouCompleteMe
+  let g:ycm_min_num_of_chars_for_completion = 3
+  let g:ycm_min_num_identifier_candidate_chars = 3
+  let g:ycm_enable_diagnostic_highlighting = 0
+  set completeopt-=preview
+  let g:ycm_add_preview_to_completeopt = 0
+  let g:ycm_enable_diagnostic_signs = 0
+  " let g:ycm_key_list_stop_completion = "<C-y>"
+  " let g:ycm_key_list_select_completion = "<C-y>"
+
+" UtilSnips
+  let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/ultisnips"]
+  let g:UltiSnipsExpandTrigger = "<C-l>"
+  let g:UltiSnipsJumpForwardTrigger = "<C-l>"
+  let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+  let g:UltiSnipsEditSplit = "vertical"
+
+" Split Screens
+"/ Obvious Resize
+let g:obvious_resize_default = 5
+nnoremap <silent>    <Up> :<C-U>ObviousResizeUp<CR>
+nnoremap <silent>  <Down> :<C-U>ObviousResizeDown<CR>
+nnoremap <silent>  <Left> :<C-U>ObviousResizeLeft<CR>
+nnoremap <silent> <Right> :<C-U>ObviousResizeRight<CR>
+
+" moving between panes
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-l> <C-w><C-l>
+
+" FZF fuzzy find
+nnoremap    <leader>b           :Buffers<cr>
+nnoremap    <leader>f           :Files<cr>
+nnoremap    <leader>l           :Lines<cr>
+nnoremap    <leader>:           :History:<cr>
+nnoremap    <leader>]           :Tags<cr>
+nnoremap    <leader>m           :Marks<cr>
+nnoremap    <leader>h           :History<cr>
+
+let g:ackprg = 'rg --vimgrep'
+let g:ackhighlight = 1
+
+" Vimux
+" let g:VimuxOrientation = "v"
+" let g:VimuxHeight = "40"
+let test#strategy = "asyncrun"
+
+nnoremap    <leader>tt          :TestNearest<CR>
+nnoremap    <leader>tf          :TestFile<CR>
+nnoremap    <leader>ta          :TestSuite<CR>
+nnoremap    <leader>tl          :TestLast<CR>
+nnoremap    <leader>tg          :TestVisit<CR>
+
+nnoremap    <Leader>vq          :VimuxCloseRunner<CR>
+nnoremap    <Leader>vz          :call VimuxZoomRunner()<CR>
+nnoremap    <Leader>vi          :VimuxInspectRunner<CR>
+map         <Leader>vl          :VimuxRunLastCommand<CR>
+map         <Leader>vp          :VimuxPromptCommand<CR>
+nnoremap    <leader>vr          :call VimuxRunLastCommand()<CR>
+nnoremap    <leader>vc          :call VimuxCloseRunner()<CR>
+nnoremap    <leader>w           :Files<cr><c-r><c-w>
+
+" Linting
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fix_on_save = 1
+let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+let g:ale_linters = {
+\  'javascript': ['eslint'],
+\  'typescript': ['tslint', 'tsserver'],
+\  'graphql': ['gqlint']
+\}
+let g:ale_fixers = {
+\ 'javascript': ['prettier'],
+\ 'typescript': ['tslint', 'prettier']
+\}
+nmap <F8> <Plug>(ale_fix)
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
+endfunction
+
+function! LightlineFilename()
+  return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+        \ &filetype ==# 'unite' ? unite#get_status_string() :
+        \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+        \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+endfunction
+
+autocmd User ALELint call s:MaybeUpdateLightline()
+
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Section: Visual
+" ===============
+
+" colorscheme jellybeans
+
+" Make sure colored syntax mode is on, and make it Just Work with newer 256
+" color terminals like iTerm2.
+
+let g:rehash256 = 1
+if has('gui_running')
+  set guicursor+=n-v-c:blinkon0
+  set guioptions=
+else
+  if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+    set t_Co=256
+  elseif has("terminfo")
+    colorscheme default
+    set t_Co=8
+    set t_Sf=[3%p1%dm
+    set t_Sb=[4%p1%dm
+  else
+    colorscheme default
+    set t_Co=8
+    set t_Sf=[3%dm
+    set t_Sb=[4%dm
+  endif
+  " Disable Background Color Erase when within tmux -
+  " https://stackoverflow.com/q/6427650/102704
+  if $TMUX != ""
+    set t_ut=
+  endif
+endif
+
