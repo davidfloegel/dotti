@@ -38,10 +38,12 @@ set wildignore+=*/.git,*/tmp/*,*.so,*.swp,*.zip
 " :help 'backspace'
 set backspace=indent,eol,start
 
-" Set the redraw rate to 10k ms for a smoother experience
-" :help 'redrawtime'
+" turn on syntax highlighting
 syntax on
-set redrawtime=10000
+
+" Set lazyredraw on for performance improvements
+" :help 'lazyredraw'
+set lazyredraw
 
 " Configure the leader to be Space and local leader to be \ 
 " :help 'mapleader'
@@ -124,8 +126,13 @@ noremap <silent> <Down>  :exe "resize " . (winheight(0) + 5)<CR>
 
 " Viewing linting errors
 " Usage: run leader + l to display all errors
-noremap <leader>l :LspDocumentDiagnostics <CR>
+noremap <leader>l :LspDocumentDiagnostics<CR>
 
 " Auto-Formatting w/ prettier when leaving the insert mode
 let g:prettier#quickfix_enabled = 0
 autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.json,*.graphql,*.md,*.yaml,*.html PrettierAsync
+
+" Fuzzy Finding using fzf
+set rtp+=/usr/local/opt/fzf
+noremap <leader>f :FZF<CR>
+
