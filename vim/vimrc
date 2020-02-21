@@ -1,8 +1,8 @@
-" ==========================================================
+" =================================================================================================
 " Notes
-" ==========================================================
+" =================================================================================================
 "
-" swapfiles:
+" Swap files:
 "     We're enabling swap files. This means that .swp or
 "     .swo files will be created. They have to be ignored
 "     for git so adding a global gitignore file that ignores
@@ -10,9 +10,9 @@
 "
 
 
-" ==========================================================
+" =================================================================================================
 " General Configuration
-" ==========================================================
+" =================================================================================================
 
 " turn this on for lots of cool vim shit
 " :help 'nocompatible'
@@ -26,9 +26,13 @@ set t_Co=256
 " :help 'clipboard'
 set clipboard=unnamed
 
-" Enable filetype detection and automatic language-dependant indenting
+" Enable file type detection and automatic language-dependant indenting
 " :help 'filetype'
 filetype plugin indent on
+
+" Ignore specific files in vim
+" :help 'wildignore'
+set wildignore+=*/.git,*/tmp/*,*.so,*.swp,*.zip
 
 " make backspace key work in the same behaviour as other applications
 " :help 'backspace'
@@ -46,7 +50,7 @@ let mapleader = "\<Space>"
 let maplocalleader = "\\"
 
 " Configure relative line numbers cause they're amazing!
-" Autotoggle between relative and absolute line numbers on insert / view mode
+" Auto toggle between relative and absolute line numbers on insert / view mode
 " :help 'number'
 set number relativenumber
 augroup numbertoggle
@@ -65,4 +69,63 @@ set shiftwidth=2
 set softtabstop=2
 set colorcolumn=100
 
+" Set symbols that indicate tabs and white spaces and use light grey colour
+" :help 'list'
+" :help 'listchars
+set list
+set listchars=tab:→\
+set listchars+=trail:·
+set listchars+=space:·
+highlight NonText ctermfg=lightgrey
+highlight SpecialKey ctermfg=lightgrey
 
+" Enable spell checks and set the default language to English 
+" Overwrite how the spelling errors should be highlighted using hi
+" :help 'spell'
+set spell
+set ignorecase smartcase
+set spelllang=en_gb
+highlight clear SpellBad
+highlight SpellBad cterm=undercurl ctermfg=red
+
+
+" =================================================================================================
+" Actions + Functions
+" =================================================================================================
+
+" Moving selected line up or down
+" Usage: Press <leader> and j (up) or k (down)
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+
+" Helper function to automatically clean trailing white spaces
+function! <SID>StripTrailingWhitespaces()
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+" Automatically run StripTrailingWhitespaces function on file save on the
+" given file names
+autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py,*.feature, :call <SID>StripTrailingWhitespaces()
+
+" Creating Panes + Resizing
+" Usage:
+" - Create new horizontal split pane: CTRL + w + V
+" - Resize vertical: left and right arrow keys
+" - Resize horizontal: up and down arrow keys
+noremap <silent> <Left>  :exe "vertical resize " . (winwidth(0) - 5)<CR>
+noremap <silent> <Right> :exe "vertical resize " . (winwidth(0) + 5)<CR>
+noremap <silent> <Up>    :exe "resize " . (winheight(0) - 5)<CR>
+noremap <silent> <Down>  :exe "resize " . (winheight(0) + 5)<CR>
+
+" Viewing linting errors
+" Usage: run leader + l to display all errors
+noremap <leader>l :LspDocumentDiagnostics <CR>
+
+" Auto-Formatting w/ prettier when leaving the insert mode
+let g:prettier#quickfix_enabled = 0
+autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.json,*.graphql,*.md,*.yaml,*.html PrettierAsync
