@@ -10,6 +10,7 @@ CONFIG=$(pwd)
 echo "install Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew upgrade
+brew update
 
 
 # ZSH
@@ -40,15 +41,28 @@ else
   echo "✅ .gitignore_global file already linked, ignore"
 fi
 
-# NVM
-brew reinstall nvm
-nvm install 10
-nvm alias default 10
+# Git configuration
+git config core.ignorecase false
 
+# NVM
+ brew reinstall nvm
+ nvm install 10
+ nvm alias default 10
+
+# HUB
+brew install hub
+
+# Install packages
+yarn global add prettier tslint
 
 #-------------------------------------------------------------------------------
 # Configure VIM
 #-------------------------------------------------------------------------------
+brew install vim
+vim --version
+brew install fzf
+$(brew --prefix)/opt/fzf/install
+brew install ripgrep
 if [ ! -f ~/.vimrc ]; then
   ln -s ${CONFIG}/vim/vimrc ~/.vimrc
   echo "✅ Linked vimrc config to ~/.vimrc"
@@ -70,7 +84,22 @@ else
   echo "✅ autoload config already linked, ignore"
 fi
 
-echo "reinstalling Vim Plugins"
-brew reinstall macvim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +Pluginreinstall +qall
+yarn global add typescript-language-server
+
+cd ~/.vim
+mkdir -p ~/pack
+cd ./pack
+git clone https://github.com/tpope/vim-vinegar.git
+git clone https://tpope.io/vim/surround.git
+vim -u NONE -c "helptags surround/doc" -c q
+git clone https://tpope.io/vim/commentary.git
+vim -u NONE -c "helptags commentary/doc" -c q
+git clone https://github.com/prabirshrestha/async.vim.git
+git clone https://github.com/prabirshrestha/vim-lsp.git
+git clone https://github.com/prabirshrestha/asyncomplete.vim.git
+git clone https://github.com/prabirshrestha/asyncomplete-lsp.vim
+git clone https://github.com/ryanolsonx/vim-lsp-typescript.git
+git clone https://github.com/prettier/vim-prettier
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
