@@ -8,14 +8,15 @@ CONFIG=$(pwd)
 
 # Homebrew
 echo "install Homebrew..."
-# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# brew upgrade
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew upgrade
+brew update
 
 
 # ZSH
 echo "install ZSH..."
-# brew reinstall zsh
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+brew reinstall zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 if [ ! -f ~/.zshrc ]; then
   ln -s ${CONFIG}/zsh/zshrc ~/.zshrc
@@ -57,6 +58,11 @@ yarn global add prettier tslint
 #-------------------------------------------------------------------------------
 # Configure VIM
 #-------------------------------------------------------------------------------
+brew install vim
+vim --version
+brew install fzf
+$(brew --prefix)/opt/fzf/install
+brew install ripgrep
 if [ ! -f ~/.vimrc ]; then
   ln -s ${CONFIG}/vim/vimrc ~/.vimrc
   echo "✅ Linked vimrc config to ~/.vimrc"
@@ -78,12 +84,22 @@ else
   echo "✅ autoload config already linked, ignore"
 fi
 
-echo "reinstalling Vim Plugins"
-brew reinstall macvim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +Pluginreinstall +qall
+yarn global add typescript-language-server
 
-# set up YouCompleteMe
-cd ~/.vim/bundle/YouCompleteMe
-./install.py --ts-completer
+cd ~/.vim
+mkdir -p ~/pack
+cd ./pack
+git clone https://github.com/tpope/vim-vinegar.git
+git clone https://tpope.io/vim/surround.git
+vim -u NONE -c "helptags surround/doc" -c q
+git clone https://tpope.io/vim/commentary.git
+vim -u NONE -c "helptags commentary/doc" -c q
+git clone https://github.com/prabirshrestha/async.vim.git
+git clone https://github.com/prabirshrestha/vim-lsp.git
+git clone https://github.com/prabirshrestha/asyncomplete.vim.git
+git clone https://github.com/prabirshrestha/asyncomplete-lsp.vim
+git clone https://github.com/ryanolsonx/vim-lsp-typescript.git
+git clone https://github.com/prettier/vim-prettier
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 

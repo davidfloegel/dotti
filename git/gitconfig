@@ -6,4 +6,4 @@
 [user]
 	email = mail@davidfloegel.com
 [core]
-	excludesfile = /Users/davidfloegel/.gitignore_global
+	excludesfile = /Users/david/.gitignore_global

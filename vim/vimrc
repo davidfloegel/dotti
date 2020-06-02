@@ -9,6 +9,24 @@
 "     those is helpful
 "
 
+" =================================================================================================
+" Plugins Used
+" =================================================================================================
+" Tpope
+"   - https://github.com/tpope/vim-vinegar.git
+"   - https://tpope.io/vim/surround.git
+"   - https://tpope.io/vim/commentary.git
+"
+" Junegunn
+"   - https://github.com/junegunn/fzf.git
+"
+" Typescript Language Support
+"   - https://github.com/prabirshrestha/async.vim.git
+"   - https://github.com/prabirshrestha/vim-lsp.git
+"   - https://github.com/prabirshrestha/asyncomplete.vim.git
+"   - https://github.com/prabirshrestha/asyncomplete-lsp.vim
+"   - https://github.com/ryanolsonx/vim-lsp-typescript.git
+"   - https://github.com/prettier/vim-prettier
 
 " =================================================================================================
 " General Configuration
@@ -124,13 +142,33 @@ noremap <silent> <Right> :exe "vertical resize " . (winwidth(0) + 5)<CR>
 noremap <silent> <Up>    :exe "resize " . (winheight(0) - 5)<CR>
 noremap <silent> <Down>  :exe "resize " . (winheight(0) + 5)<CR>
 
+" Auto completion
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+
+let g:asyncomplete_auto_popup = 0
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
 " Viewing linting errors
 " Usage: run leader + l to display all errors
 noremap <leader>l :LspDocumentDiagnostics<CR>
+let g:lsp_highlight_references_enabled = 1
 
 " Auto-Formatting w/ prettier when leaving the insert mode
 let g:prettier#quickfix_enabled = 0
-autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.json,*.graphql,*.md,*.yaml,*.html PrettierAsync
+autocmd BufWritePost *.js,*.jsx,*.mjs,*.ts,*.tsx,*.json,*.graphql,*.md,*.yaml,*.html PrettierAsync
 
 " Fuzzy Finding using fzf
 set rtp+=/usr/local/opt/fzf
