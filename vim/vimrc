@@ -106,7 +106,8 @@ set spell
 set ignorecase smartcase
 set spelllang=en_gb
 highlight clear SpellBad
-highlight SpellBad cterm=undercurl ctermfg=red
+highlight SpellBad cterm=undercurl 
+" ctermfg=red
 
 
 " =================================================================================================
@@ -170,7 +171,23 @@ let g:lsp_highlight_references_enabled = 1
 let g:prettier#quickfix_enabled = 0
 autocmd BufWritePost *.js,*.jsx,*.mjs,*.ts,*.tsx,*.json,*.graphql,*.md,*.yaml,*.html PrettierAsync
 
+" Formatting with easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " Fuzzy Finding using fzf
 set rtp+=/usr/local/opt/fzf
 noremap <leader>f :FZF<CR>
 
+" Search & Find
+nmap     <C-F>f <Plug>CtrlSFPrompt     
+vmap     <C-F>f <Plug>CtrlSFVwordPath
+vmap     <C-F>F <Plug>CtrlSFVwordExec
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+nnoremap <C-F>o :CtrlSFOpen<CR>
+nnoremap <C-F>t :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>

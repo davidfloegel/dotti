@@ -45,12 +45,15 @@ fi
 git config core.ignorecase false
 
 # NVM
- brew reinstall nvm
- nvm install 10
- nvm alias default 10
+brew reinstall nvm
+nvm install 10
+nvm alias default 10
 
 # HUB
 brew install hub
+
+# YARN
+brew install yarn
 
 # Install packages
 yarn global add prettier tslint
@@ -86,20 +89,18 @@ fi
 
 yarn global add typescript-language-server
 
-cd ~/.vim
-mkdir -p ~/pack
-cd ./pack
-git clone https://github.com/tpope/vim-vinegar.git
-git clone https://tpope.io/vim/surround.git
-vim -u NONE -c "helptags surround/doc" -c q
-git clone https://tpope.io/vim/commentary.git
-vim -u NONE -c "helptags commentary/doc" -c q
-git clone https://github.com/prabirshrestha/async.vim.git
-git clone https://github.com/prabirshrestha/vim-lsp.git
-git clone https://github.com/prabirshrestha/asyncomplete.vim.git
-git clone https://github.com/prabirshrestha/asyncomplete-lsp.vim
-git clone https://github.com/ryanolsonx/vim-lsp-typescript.git
-git clone https://github.com/prettier/vim-prettier
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
-
+mkdir -p ~/.vim/pack/custom/start
+cd ~/.vim/pack/custom/start
+git clone git@github.com:tpope/vim-vinegar.git
+git clone git@github.com:tpope/vim-surround.git 
+git clone git@github.com:tpope/vim-commentary.git
+git clone git@github.com:prabirshrestha/async.vim.git
+git clone https://github.com/prabirshrestha/vim-lsp
+git clone https://github.com/prabirshrestha/asyncomplete.vim
+git clone https://github.com/prabirshrestha/asyncomplete-lsp.vim
+git clone https://github.com/ryanolsonx/vim-lsp-typescript
+git clone git@github.com:prettier/vim-prettier.git
+git clone https://github.com/dyng/ctrlsf.vim
+git clone https://github.com/sheerun/vim-polyglot
+git clone https://github.com/styled-components/vim-styled-components
+git@github.com:junegunn/vim-easy-align.git
