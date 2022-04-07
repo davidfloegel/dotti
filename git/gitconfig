@@ -1,5 +1,6 @@
 # This is Git's per-user configuration file.
 [user]
+	name = David Floegel
 # Please adapt and uncomment the following lines:
 #	name = David Floegel
 #	email = mail@davidfloegel.com
@@ -7,3 +8,4 @@
 	email = mail@davidfloegel.com
 [core]
 	excludesfile = /Users/david/.gitignore_global
+	ignorecase = false
