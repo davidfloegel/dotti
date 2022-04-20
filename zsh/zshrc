@@ -1,12 +1,12 @@
-export ZSH="/Users/davidfloegel/.oh-my-zsh"
+export ZSH="/Users/david.floegel/.oh-my-zsh"
 
-ZSH_THEME="robbyrussel"
+ZSH_THEME="robbyrussell"
 
 plugins=(git)
 
-source $ZSH/oh-my-sh.sh
+source $ZSH/oh-my-zsh.sh
 
-export NVM_DIR="/Users/davidfloegel/.nvm"
+export NVM_DIR="/Users/david.floegel/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 eval "$(rbenv init -)"

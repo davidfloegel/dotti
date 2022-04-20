@@ -12,6 +12,8 @@ echo "install Homebrew..."
 brew upgrade
 brew update
 
+# Install rbenv
+brew install rbenv
 
 # ZSH
 echo "install ZSH..."
