@@ -1,5 +1,8 @@
 export ZSH="/Users/david.floegel/.oh-my-zsh"
 
+alias vim="nvim"
+alias vi="nvim"
+
 ZSH_THEME="robbyrussell"
 
 plugins=(git)
@@ -12,5 +15,7 @@ export NVM_DIR="/Users/david.floegel/.nvm"
 eval "$(rbenv init -)"
 
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export GH_TOKEN=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

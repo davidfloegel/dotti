@@ -48,8 +48,8 @@ git config core.ignorecase false
 
 # NVM
 brew reinstall nvm
-nvm install 10
-nvm alias default 10
+nvm install 14
+nvm alias default 14
 
 # HUB
 brew install hub
@@ -65,7 +65,14 @@ yarn global add prettier tslint
 #-------------------------------------------------------------------------------
 brew install vim
 vim --version
+
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# required for YCM (You Complete Me)
+brew install cmake python go
+
 brew install fzf
+
 $(brew --prefix)/opt/fzf/install
 brew install ripgrep
 if [ ! -f ~/.vimrc ]; then
@@ -89,6 +96,8 @@ else
   echo "✅ autoload config already linked, ignore"
 fi
 
+vim +PluginInstall +qall
+
 yarn global add typescript-language-server
 
 mkdir -p ~/.vim/pack/custom/start
@@ -105,4 +114,5 @@ git clone git@github.com:prettier/vim-prettier.git
 git clone https://github.com/dyng/ctrlsf.vim
 git clone https://github.com/sheerun/vim-polyglot
 git clone https://github.com/styled-components/vim-styled-components
-git@github.com:junegunn/vim-easy-align.git
+git clone https://github.com/jremmen/vim-ripgrep
+git clone git@github.com:junegunn/vim-easy-align.git

@@ -81,6 +81,7 @@ set noswapfile
 syntax on
 set redrawtime=10000
 
+" Set the leader to the be the space bar
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
 
@@ -130,7 +131,7 @@ nnoremap <leader>k :m .-2<CR>==
 
 
 " highlight parenthesis
-highlight MatchParen cterm=none ctermbg=none ctermfg=blue
+highlight MatchParen cterm=none ctermbg=blue ctermfg=white
 
 " clean up trailing whitespaces
 function! <SID>StripTrailingWhitespaces()

@@ -9,3 +9,5 @@
 [core]
 	excludesfile = /Users/david/.gitignore_global
 	ignorecase = false
+[init]
+	defaultBranch = main
